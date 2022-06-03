@@ -25,7 +25,7 @@ public class PutRecipeUseCase {
                 .map(mapper::toRecipeDTO);
     }
 
-    public Mono<Recipe> validateItExists(String id) {
+    private Mono<Recipe> validateItExists(String id) {
         return repository.findById(id)
                 .switchIfEmpty(Mono.error(() -> new IllegalStateException("User does not exits")));
     }

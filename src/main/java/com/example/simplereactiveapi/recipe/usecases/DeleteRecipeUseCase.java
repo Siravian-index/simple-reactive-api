@@ -1,7 +1,6 @@
 package com.example.simplereactiveapi.recipe.usecases;
 
 import com.example.simplereactiveapi.recipe.Recipe;
-import com.example.simplereactiveapi.recipe.RecipeDTO;
 import com.example.simplereactiveapi.recipe.RecipeRepository;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
