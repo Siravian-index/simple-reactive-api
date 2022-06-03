@@ -1,6 +1,7 @@
 package com.example.simplereactiveapi.recipe;
 
 
+import com.example.simplereactiveapi.recipe.usecases.DeleteRecipeUseCase;
 import com.example.simplereactiveapi.recipe.usecases.GetRecipesUseCase;
 import com.example.simplereactiveapi.recipe.usecases.PostRecipeUseCase;
 import org.springframework.context.annotation.Bean;
@@ -36,23 +37,13 @@ public class RecipeController {
         );
     }
 
-
-
-    //Two options:
-    //1
-        /*return route(POST("/save/patient").and(accept(MediaType.APPLICATION_JSON)),
-                request -> request.bodyToMono(PatientDTO.class)
-                .flatMap(savePatientUseCase::apply)
-                .flatMap(result -> ServerResponse.status(HttpStatus.CREATED)
-                .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue(result))
-        );*/
-
-    //2
-//    Function<PatientDTO, Mono<ServerResponse>> executeGuardar = patientDTO -> savePatientUseCase.apply(patientDTO)
-//            .flatMap(result -> ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).bodyValue(result));
-//
-//        return route(POST("/save/patient").and(accept(MediaType.APPLICATION_JSON)), request -> request.bodyToMono(PatientDTO.class).flatMap(executeGuardar));
+    @Bean
+    public RouterFunction<ServerResponse> deleteRecipe(DeleteRecipeUseCase remove) {
+        return route(DELETE("/v1/api/recipe/{id}").and(accept(MediaType.APPLICATION_JSON)),
+                request -> ServerResponse.status(HttpStatus.ACCEPTED)
+                        .body(BodyInserters.fromProducer(remove.removeRecipe(request.pathVariable("id")), Void.class))
+        );
+    }
 
 
 }

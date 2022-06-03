@@ -14,7 +14,7 @@ public class DeleteRecipeUseCase {
         this.repository = repository;
     }
 
-    public Mono<Void> removeRecipe(RecipeDTO recipeDTO) {
-        return repository.deleteById(recipeDTO.getId());
+    public Mono<Void> removeRecipe(String id) {
+        return repository.deleteById(id);
     }
 }
