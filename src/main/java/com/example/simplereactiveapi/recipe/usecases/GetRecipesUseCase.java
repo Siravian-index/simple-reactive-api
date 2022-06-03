@@ -8,11 +8,11 @@ import reactor.core.publisher.Flux;
 
 @Service
 //@Validated
-public class GetRecipes  {
+public class GetRecipesUseCase {
     private final RecipeRepository repository;
     private final RecipeMapper mapper;
 
-    public GetRecipes(RecipeRepository repository, RecipeMapper mapper) {
+    public GetRecipesUseCase(RecipeRepository repository, RecipeMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }

@@ -6,11 +6,11 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
-public class DeleteRecipe {
+public class DeleteRecipeUseCase {
 
     private final RecipeRepository repository;
 
-    public DeleteRecipe(RecipeRepository repository) {
+    public DeleteRecipeUseCase(RecipeRepository repository) {
         this.repository = repository;
     }
 

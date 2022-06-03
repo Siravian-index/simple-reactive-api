@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
-public class PostRecipe {
+public class PostRecipeUseCase {
     private final RecipeRepository repository;
     private final RecipeMapper mapper;
 
-    public PostRecipe(RecipeRepository repository, RecipeMapper mapper) {
+    public PostRecipeUseCase(RecipeRepository repository, RecipeMapper mapper) {
         this.repository = repository;
         this.mapper = mapper;
     }
