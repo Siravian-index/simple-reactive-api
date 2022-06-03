@@ -26,7 +26,6 @@ public class PostRecipeUseCase {
                     return Mono.empty();
                 })
                 .flatMap(recipeDTO1 -> repository.save(mapper.toEntity(recipeDTO1)))
-//                .then(repository.save(mapper.toEntity(recipeDTO)))
                 .map(mapper::toRecipeDTO);
     }
 
