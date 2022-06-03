@@ -21,10 +21,6 @@ public class PostRecipeUseCase {
 
     public Mono<RecipeDTO> postRecipe(RecipeDTO recipeDTO) {
         return validateDTO(recipeDTO)
-                .onErrorResume(throwable -> {
-                    log.info(throwable.getMessage());
-                    return Mono.empty();
-                })
                 .flatMap(recipeDTO1 -> repository.save(mapper.toEntity(recipeDTO1)))
                 .map(mapper::toRecipeDTO);
     }

@@ -35,7 +35,7 @@ public class RecipeController {
                         .flatMap(recipeDTO -> ServerResponse.status(HttpStatus.CREATED)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .bodyValue(recipeDTO))
-                        .switchIfEmpty(ServerResponse.status(HttpStatus.BAD_REQUEST).build())
+                        .onErrorResume(e -> ServerResponse.status(HttpStatus.BAD_REQUEST).build())
         );
     }
 
@@ -48,7 +48,7 @@ public class RecipeController {
                         .flatMap(recipeDTO -> ServerResponse.status(HttpStatus.ACCEPTED)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .bodyValue(recipeDTO))
-                        .switchIfEmpty(ServerResponse.status(HttpStatus.BAD_REQUEST).build())
+                        .onErrorResume(e -> ServerResponse.status(HttpStatus.BAD_REQUEST).build())
         );
     }
 
@@ -56,8 +56,9 @@ public class RecipeController {
     public RouterFunction<ServerResponse> deleteRecipe(DeleteRecipeUseCase remove) {
 //        Missing Bad request ServerResponse
         return route(DELETE("/v1/api/recipe/{id}").and(accept(MediaType.APPLICATION_JSON)),
-                request -> ServerResponse.status(HttpStatus.ACCEPTED)
-                        .body(BodyInserters.fromProducer(remove.removeRecipe(request.pathVariable("id")), Void.class))
+                request -> remove.removeRecipe(request.pathVariable("id"))
+                        .flatMap((unused) -> ServerResponse.status(HttpStatus.ACCEPTED).build())
+                        .onErrorResume(e -> ServerResponse.status(HttpStatus.NOT_FOUND).build())
         );
     }
 
