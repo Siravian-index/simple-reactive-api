@@ -4,8 +4,10 @@ import com.example.simplereactiveapi.recipe.Recipe;
 import com.example.simplereactiveapi.recipe.RecipeDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.config.EnableWebFlux;
 
 @Component
+@EnableWebFlux
 public class RecipeMapper {
 
     private final ModelMapper modelMapper;
