@@ -1,4 +1,4 @@
-package com.example.simplereactiveapi.recipe;
+package com.example.simplereactiveapi.recipe.entity;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

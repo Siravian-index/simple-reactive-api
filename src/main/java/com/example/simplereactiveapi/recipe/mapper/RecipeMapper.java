@@ -1,7 +1,7 @@
 package com.example.simplereactiveapi.recipe.mapper;
 
-import com.example.simplereactiveapi.recipe.Recipe;
-import com.example.simplereactiveapi.recipe.RecipeDTO;
+import com.example.simplereactiveapi.recipe.entity.Recipe;
+import com.example.simplereactiveapi.recipe.dto.RecipeDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.config.EnableWebFlux;

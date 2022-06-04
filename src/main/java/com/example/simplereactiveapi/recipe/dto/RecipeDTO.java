@@ -1,4 +1,4 @@
-package com.example.simplereactiveapi.recipe;
+package com.example.simplereactiveapi.recipe.dto;
 
 import lombok.Data;
 
