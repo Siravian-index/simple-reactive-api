@@ -1,32 +1,26 @@
 package com.example.simplereactiveapi.recipe.usecases;
 
-import com.example.simplereactiveapi.recipe.entity.Recipe;
 import com.example.simplereactiveapi.recipe.dto.RecipeDTO;
 import com.example.simplereactiveapi.recipe.repository.RecipeRepository;
 import com.example.simplereactiveapi.recipe.mapper.RecipeMapper;
+import com.example.simplereactiveapi.recipe.validator.RecipeValidator;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
+@AllArgsConstructor
 public class PutRecipeUseCase {
 
     private final RecipeRepository repository;
     private final RecipeMapper mapper;
-
-    public PutRecipeUseCase(RecipeRepository repository, RecipeMapper mapper) {
-        this.repository = repository;
-        this.mapper = mapper;
-    }
+    private final RecipeValidator validator;
 
     public Mono<RecipeDTO> apply(RecipeDTO recipeDTO) {
-        return validateItExists(recipeDTO.getId())
+        return validator.validateItExists(recipeDTO.getId())
                 .flatMap(recipe -> repository.save(mapper.toEntity(recipeDTO)))
                 .map(mapper::toRecipeDTO);
     }
 
-    private Mono<Recipe> validateItExists(String id) {
-        return repository.findById(id)
-                .switchIfEmpty(Mono.error(() -> new IllegalStateException("User does not exits  " + id)));
-    }
 }
 
