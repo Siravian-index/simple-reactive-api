@@ -17,7 +17,7 @@ public class GetRecipesUseCase {
         this.mapper = mapper;
     }
 
-    public Flux<RecipeDTO> getRecipes() {
+    public Flux<RecipeDTO> apply() {
         return repository.findAll().map(mapper::toRecipeDTO);
     }
 

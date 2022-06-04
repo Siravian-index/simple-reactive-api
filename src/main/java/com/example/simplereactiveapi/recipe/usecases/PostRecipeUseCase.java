@@ -17,7 +17,7 @@ public class PostRecipeUseCase {
     }
 
 
-    public Mono<RecipeDTO> postRecipe(RecipeDTO recipeDTO) {
+    public Mono<RecipeDTO> apply(RecipeDTO recipeDTO) {
         return validateDTO(recipeDTO)
                 .flatMap(recipeDTO1 -> repository.save(mapper.toEntity(recipeDTO1)))
                 .map(mapper::toRecipeDTO);

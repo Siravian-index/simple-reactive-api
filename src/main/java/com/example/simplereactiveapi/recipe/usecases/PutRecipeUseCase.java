@@ -18,7 +18,7 @@ public class PutRecipeUseCase {
         this.mapper = mapper;
     }
 
-    public Mono<RecipeDTO> putRecipe(RecipeDTO recipeDTO) {
+    public Mono<RecipeDTO> apply(RecipeDTO recipeDTO) {
         return validateItExists(recipeDTO.getId())
                 .flatMap(recipe -> repository.save(mapper.toEntity(recipeDTO)))
                 .map(mapper::toRecipeDTO);

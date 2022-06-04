@@ -20,7 +20,7 @@ public class PostRecipeRoute {
     public RouterFunction<ServerResponse> postRecipe(PostRecipeUseCase post) {
         return route(POST("/v1/api/recipe/").and(accept(MediaType.APPLICATION_JSON)),
                 request -> request.bodyToMono(RecipeDTO.class)
-                        .flatMap(post::postRecipe)
+                        .flatMap(post::apply)
                         .flatMap(recipeDTO -> ServerResponse.status(HttpStatus.CREATED)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .bodyValue(recipeDTO))

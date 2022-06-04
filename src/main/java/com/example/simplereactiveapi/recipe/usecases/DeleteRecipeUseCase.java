@@ -14,7 +14,7 @@ public class DeleteRecipeUseCase {
         this.repository = repository;
     }
 
-    public Mono<Void> removeRecipe(String id) {
+    public Mono<Void> apply(String id) {
         return validateItExists(id)
                 .flatMap(recipe -> repository.deleteById(recipe.getId()));
 

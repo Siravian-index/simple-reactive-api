@@ -18,7 +18,7 @@ public class GetRecipesRoute {
     public RouterFunction<ServerResponse> allRecipes(GetRecipesUseCase get) {
         return route(GET("/v1/api/recipe/"), request -> ServerResponse.ok()
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromProducer(get.getRecipes(), RecipeDTO.class))
+                .body(BodyInserters.fromProducer(get.apply(), RecipeDTO.class))
         );
     }
 }

@@ -19,7 +19,7 @@ public class PutRecipeRoute {
     public RouterFunction<ServerResponse> putRecipe(PutRecipeUseCase update) {
         return route(PUT("/v1/api/recipe/").and(accept(MediaType.APPLICATION_JSON)),
                 request -> request.bodyToMono(RecipeDTO.class)
-                        .flatMap(update::putRecipe)
+                        .flatMap(update::apply)
                         .flatMap(recipeDTO -> ServerResponse.status(HttpStatus.ACCEPTED)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .bodyValue(recipeDTO))

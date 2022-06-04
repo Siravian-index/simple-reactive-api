@@ -17,7 +17,7 @@ public class DeleteRecipeRoute {
     @Bean
     public RouterFunction<ServerResponse> deleteRecipe(DeleteRecipeUseCase remove) {
         return route(DELETE("/v1/api/recipe/{id}").and(accept(MediaType.APPLICATION_JSON)),
-                request -> remove.removeRecipe(request.pathVariable("id"))
+                request -> remove.apply(request.pathVariable("id"))
                         .flatMap((unused) -> ServerResponse.status(HttpStatus.ACCEPTED).build())
                         .onErrorResume(e -> ServerResponse.status(HttpStatus.NOT_FOUND).build())
         );
