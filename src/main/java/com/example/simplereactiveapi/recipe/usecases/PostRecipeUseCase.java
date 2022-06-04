@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
-@Slf4j
 public class PostRecipeUseCase {
     private final RecipeRepository repository;
     private final RecipeMapper mapper;

@@ -41,7 +41,6 @@ public class RecipeController {
 
     @Bean
     public RouterFunction<ServerResponse> putRecipe(PutRecipeUseCase update) {
-//        Missing Bad request ServerResponse
         return route(PUT("/v1/api/recipe/").and(accept(MediaType.APPLICATION_JSON)),
                 request -> request.bodyToMono(RecipeDTO.class)
                         .flatMap(update::putRecipe)
@@ -54,7 +53,6 @@ public class RecipeController {
 
     @Bean
     public RouterFunction<ServerResponse> deleteRecipe(DeleteRecipeUseCase remove) {
-//        Missing Bad request ServerResponse
         return route(DELETE("/v1/api/recipe/{id}").and(accept(MediaType.APPLICATION_JSON)),
                 request -> remove.removeRecipe(request.pathVariable("id"))
                         .flatMap((unused) -> ServerResponse.status(HttpStatus.ACCEPTED).build())
