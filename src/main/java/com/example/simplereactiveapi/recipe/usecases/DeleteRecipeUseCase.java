@@ -1,7 +1,6 @@
 package com.example.simplereactiveapi.recipe.usecases;
 
 import com.example.simplereactiveapi.recipe.repository.RecipeRepository;
-import com.example.simplereactiveapi.recipe.validator.RecipeValidator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
@@ -11,10 +10,10 @@ import reactor.core.publisher.Mono;
 public class DeleteRecipeUseCase {
 
     private final RecipeRepository repository;
-    private final RecipeValidator validator;
 
     public Mono<Void> apply(String id) {
-        return validator.validateItExists(id)
+        return repository.findById(id)
+                .switchIfEmpty(Mono.error(() -> new IllegalStateException("Recipe not found " + id)))
                 .flatMap(recipe -> repository.deleteById(recipe.getId()));
 
     }
