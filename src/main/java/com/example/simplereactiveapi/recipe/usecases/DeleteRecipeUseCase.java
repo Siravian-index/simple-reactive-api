@@ -15,7 +15,6 @@ public class DeleteRecipeUseCase {
         return repository.findById(id)
                 .switchIfEmpty(Mono.error(() -> new IllegalStateException("Recipe not found " + id)))
                 .flatMap(recipe -> repository.deleteById(recipe.getId()));
-
     }
 
 }
