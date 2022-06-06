@@ -51,15 +51,13 @@ class GetRecipesRouteTest {
         Mockito.when(repository.findAll()).thenReturn(Flux.just(recipe1, recipe2));
 
         webTestClient.get()
-                .uri("api/v1/recipes")
+                .uri("/v1/api/recipe/")
                 .exchange()
                 .expectStatus().isOk()
                 .expectBodyList(RecipeDTO.class)
                 .value(recipeDTOS -> {
                     Assertions.assertThat(recipeDTOS.get(0).getName()).isEqualTo(recipe1.getName());
                     Assertions.assertThat(recipeDTOS.get(1).getName()).isEqualTo(recipe2.getName());
-
                 });
-
     }
 }
