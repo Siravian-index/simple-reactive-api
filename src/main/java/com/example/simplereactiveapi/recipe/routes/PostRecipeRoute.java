@@ -45,5 +45,3 @@ public class PostRecipeRoute {
         );
     }
 }
-
-//requesBody swagger annotation
